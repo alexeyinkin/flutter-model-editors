@@ -82,9 +82,7 @@ class BookListEditingController extends AbstractListEditingController<Book, Book
   BookListEditingController() : super(minLength: 1, maxLength: 3);
 
   @override
-  BookEditingController createItemController() {
-    return BookEditingController();
-  }
+  BookEditingController createItemController() => BookEditingController();
 }
 
 void main() {
@@ -123,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: "The Power of Now",
         author: "Eckhart Tolle",
         formats: [BookFormat.paper],
-      )
+      ),
     ];
   }
 
