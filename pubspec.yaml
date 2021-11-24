@@ -1,0 +1,19 @@
+name: model_editors
+description: Editors for complex models and lists inspired by simplicity of TextEditingController.
+version: 0.1.0
+homepage: https://github.com/alexeyinkin/flutter-model-editors
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  model_interfaces: ^0.1.0
+
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
