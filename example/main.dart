@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onSavePressed() {
-    final items = _listController.nonNullItems; // or _listController.value to include nulls.
+    final items = _listController.nonNullValues; // or _listController.value to include nulls.
     print("Got ${items.length} non-empty books.");
   }
 
@@ -194,7 +194,10 @@ class BookEditor extends StatelessWidget {
         MaterialCheckboxColumn<BookFormat>(
           controller: controller.formatsController,
           allValues: BookFormat.values,
-          labels: const {BookFormat.hard: "Hard Cover", BookFormat.paper: "Paperback"},
+          labels: const {
+            BookFormat.hard: "Hard Cover",
+            BookFormat.paper: "Paperback",
+          },
         ),
       ],
     );

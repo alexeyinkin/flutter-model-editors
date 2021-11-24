@@ -1,3 +1,7 @@
+## 0.1.2
+
+* **BREAKING**: Renamed `AbstractListEditingController.nonNullItems` to `nonNullValues`.
+
 ## 0.1.1
 
 * Added code docs.

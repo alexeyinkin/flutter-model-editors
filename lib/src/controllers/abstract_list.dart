@@ -113,7 +113,7 @@ abstract class AbstractListEditingController<
   List<T?> sortValues(List<T?> values) => values;
 
   /// Filters values for non-null after reading them from [value].
-  List<T> get nonNullItems {
+  List<T> get nonNullValues {
     return value.whereType<T>().toList(growable: false);
   }
 
