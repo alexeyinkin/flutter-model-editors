@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../controllers/abstract_list.dart';
 import 'default_delete_button.dart';
@@ -35,6 +34,7 @@ class ReorderableListViewEditor<
   Widget _buildOnChange(BuildContext context) {
     final children = <Widget>[];
     final paddings = _getPaddings();
+    final length = controller.itemControllers.length;
     int index = 0;
 
     for (final itemController in controller.itemControllers) {
@@ -49,14 +49,7 @@ class ReorderableListViewEditor<
                 child: itemBuilder(context, itemController),
               ),
               ..._getDeleteButtonIfNeed(context, itemController),
-              ReorderableDragStartListener(
-                index: index,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  child: const Icon(Icons.drag_handle),
-                ),
-              ),
+              if (length > 1) _getDragHandle(index),
             ],
           ),
         ),
@@ -69,6 +62,7 @@ class ReorderableListViewEditor<
       children: children,
       shrinkWrap: shrinkWrap,
       buildDefaultDragHandles: false,
+      physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
     );
   }
 
@@ -103,5 +97,19 @@ class ReorderableListViewEditor<
         onPressed: () => controller.deleteItemController(itemController),
       ),
     ];
+  }
+
+  Widget _getDragHandle(int index) {
+    return ReorderableDragStartListener(
+      index: index,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.resizeUpDown,
+        child: Container(
+          width: 30,
+          height: 30,
+          child: const Icon(Icons.drag_handle),
+        ),
+      ),
+    );
   }
 }
