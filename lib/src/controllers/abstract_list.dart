@@ -13,6 +13,11 @@ abstract class AbstractListEditingController<
   /// Sets the upper limit for item count.
   final int maxLength;
 
+  /// Whether to fire [notifyListeners] when item controllers fire their
+  /// [notifyListeners]. If [false], only the actions on the list itself
+  /// will fire.
+  final bool notifyOnItemChanges;
+
   var _itemControllers = <C>[];
 
   /// Returns the current list of controllers.
@@ -23,6 +28,7 @@ abstract class AbstractListEditingController<
   AbstractListEditingController({
     this.minLength = 0,
     required this.maxLength,
+    this.notifyOnItemChanges = true,
   }) :
       assert(minLength >= 0),
       assert(maxLength >= 1),
@@ -50,6 +56,11 @@ abstract class AbstractListEditingController<
     for (final value in values) {
       final controller = createItemController();
       controller.value = value;
+
+      if (notifyOnItemChanges) {
+        controller.addListener(notifyListeners);
+      }
+
       controllers.add(controller);
     }
 
@@ -76,6 +87,11 @@ abstract class AbstractListEditingController<
   void add(T? value) {
     final controller = createItemController();
     controller.value = value;
+
+    if (notifyOnItemChanges) {
+      controller.addListener(notifyListeners);
+    }
+
     _itemControllers.add(controller);
 
     notifyListeners();

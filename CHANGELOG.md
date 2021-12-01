@@ -1,3 +1,8 @@
+## 0.1.4
+
+* Add `AbstractListEditingController.notifyOnItemChanges`.
+* In `AbstractListEditingController`, fire `notifyChanges()` on item changes by default.
+
 ## 0.1.3
 
 In `ReorderableListViewEditor`:
