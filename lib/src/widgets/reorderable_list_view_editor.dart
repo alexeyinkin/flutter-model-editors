@@ -14,6 +14,19 @@ class ReorderableListViewEditor<
   final bool shrinkWrap;
   final double spacing;
 
+  /// A workaround for https://github.com/flutter/flutter/issues/88570
+  /// and https://stackoverflow.com/q/70308654/11382675
+  ///
+  /// If you need to use providers with this list, add them both
+  /// in the parent of the list and in this wrapper.
+  ///
+  /// This way, when this issue is fixed and the property is removed,
+  /// it would mean one line removal for you.
+  ///
+  /// TODO: Remove when this is fixed.
+  @Deprecated('A temporary workaround for Flutter issue 88570, will be removed when fixed.')
+  final ValueWidgetBuilder<C> itemWrapper;
+
   ReorderableListViewEditor({
     Key? key,
     required this.controller,
@@ -21,6 +34,7 @@ class ReorderableListViewEditor<
     this.deleteButtonBuilder,
     this.shrinkWrap = false,
     this.spacing = .0,
+    this.itemWrapper = _defaultItemWrapper,
   }) : super(key: key);
 
   @override
@@ -39,18 +53,22 @@ class ReorderableListViewEditor<
 
     for (final itemController in controller.itemControllers) {
       children.add(
-        Container(
-          key: ValueKey(itemController),
-          padding: paddings[index],
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: itemBuilder(context, itemController),
-              ),
-              ..._getDeleteButtonIfNeed(context, itemController),
-              if (length > 1) _getDragHandle(index),
-            ],
+        itemWrapper(
+          context,
+          itemController,
+          Container(
+            key: ValueKey(itemController),
+            padding: paddings[index],
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: itemBuilder(context, itemController),
+                ),
+                ..._getDeleteButtonIfNeed(context, itemController),
+                if (length > 1) _getDragHandle(index),
+              ],
+            ),
           ),
         ),
       );
@@ -112,4 +130,6 @@ class ReorderableListViewEditor<
       ),
     );
   }
+
+  static Widget _defaultItemWrapper(BuildContext context, controller, Widget? child) => child ?? Container(key: ValueKey(controller));
 }

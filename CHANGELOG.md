@@ -1,3 +1,7 @@
+## 0.1.6
+
+* Add `ReorderableListViewEditor.itemWrapper` as a workaround for https://github.com/flutter/flutter/issues/88570.
+
 ## 0.1.5
 
 * Add `WrapListEditor` widget.
