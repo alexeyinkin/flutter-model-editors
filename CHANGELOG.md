@@ -1,3 +1,9 @@
+## 0.2.0
+
+* **BREAKING**: `AbstractListEditingController` requires non-null `value`.
+* Re-licensed under MIT No Contribution.
+* Uses `total_lints`.
+
 ## 0.1.6
 
 * Add `ReorderableListViewEditor.itemWrapper` as a workaround for https://github.com/flutter/flutter/issues/88570.

@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import '../controllers/abstract_list.dart';
 import 'default_delete_button.dart';
 
-// TODO: Allow horizontal list
-class ReorderableListViewEditor<
-  T,
-  C extends ValueNotifier<T?>
-> extends StatelessWidget {
+// TODO(alexeyinkin): Allow horizontal list
+class ReorderableListViewEditor<T, C extends ValueNotifier<T?>>
+    extends StatelessWidget {
   final AbstractListEditingController<T, C> controller;
   final Widget Function(BuildContext context, C controller) itemBuilder;
-  final Widget Function(BuildContext context, C controller)? deleteButtonBuilder;
+  final Widget Function(BuildContext context, C controller)?
+      deleteButtonBuilder;
   final bool shrinkWrap;
   final double spacing;
 
@@ -23,11 +22,10 @@ class ReorderableListViewEditor<
   /// This way, when this issue is fixed and the property is removed,
   /// it would mean one line removal for you.
   ///
-  /// TODO: Remove when this is fixed.
-  @Deprecated('A temporary workaround for Flutter issue 88570, will be removed when fixed.')
+  // TODO(alexeyinkin): Remove when this is fixed.
   final ValueWidgetBuilder<C> itemWrapper;
 
-  ReorderableListViewEditor({
+  const ReorderableListViewEditor({
     Key? key,
     required this.controller,
     required this.itemBuilder,
@@ -77,10 +75,10 @@ class ReorderableListViewEditor<
 
     return ReorderableListView(
       onReorder: controller.reorder,
-      children: children,
       shrinkWrap: shrinkWrap,
       buildDefaultDragHandles: false,
       physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
+      children: children,
     );
   }
 
@@ -89,14 +87,14 @@ class ReorderableListViewEditor<
     if (length == 0) return [];
 
     final result = [
-      EdgeInsets.only(top: 0, bottom: spacing / 2),
+      EdgeInsets.only(bottom: spacing / 2),
       ...List.filled(
         length - 1,
         EdgeInsets.only(top: spacing / 2, bottom: spacing / 2),
       ),
     ];
 
-    result.last = EdgeInsets.only(top: result.last.top, bottom: 0);
+    result.last = EdgeInsets.only(top: result.last.top);
 
     return result;
   }
@@ -120,16 +118,22 @@ class ReorderableListViewEditor<
   Widget _getDragHandle(int index) {
     return ReorderableDragStartListener(
       index: index,
-      child: MouseRegion(
+      child: const MouseRegion(
         cursor: SystemMouseCursors.resizeUpDown,
-        child: Container(
+        child: SizedBox(
           width: 30,
           height: 30,
-          child: const Icon(Icons.drag_handle),
+          child: Icon(Icons.drag_handle),
         ),
       ),
     );
   }
 
-  static Widget _defaultItemWrapper(BuildContext context, controller, Widget? child) => child ?? Container(key: ValueKey(controller));
+  static Widget _defaultItemWrapper(
+    BuildContext context,
+    controller,
+    Widget? child,
+  ) {
+    return child ?? Container(key: ValueKey(controller));
+  }
 }

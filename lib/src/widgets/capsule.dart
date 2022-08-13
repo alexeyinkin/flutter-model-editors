@@ -12,29 +12,29 @@ class CapsuleWidget extends StatelessWidget {
     vertical: verticalPadding,
   );
 
-  CapsuleWidget({
+  const CapsuleWidget({
     required this.child,
     this.selected = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: _padding,
-        child: child,
-      ),
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: _getBackgroundColor(context),
         borderRadius: BorderRadius.circular(40),
+      ),
+      child: Padding(
+        padding: _padding,
+        child: child,
       ),
     );
   }
 
   Color _getBackgroundColor(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
+    final themeData = Theme.of(context);
 
-    // TODO: Use some theme colors.
+    // TODO(alexeyinkin): Use some theme colors.
     switch (themeData.brightness) {
       case Brightness.dark:
         return Color(selected ? 0x70FFFFFF : 0x40FFFFFF);

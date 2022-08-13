@@ -5,7 +5,7 @@ class MaterialCheckboxAndText extends StatelessWidget {
   final ValueChanged<bool?> onChanged;
   final String text;
 
-  MaterialCheckboxAndText({
+  const MaterialCheckboxAndText({
     Key? key,
     required this.value,
     required this.onChanged,
@@ -14,7 +14,7 @@ class MaterialCheckboxAndText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Change on the text tap too.
+    // TODO(alexeyinkin): Change on the text tap too.
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

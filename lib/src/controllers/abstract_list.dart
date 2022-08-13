@@ -1,12 +1,12 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+import '../widgets/list_add_button_builder.dart';
 
 /// A controller for managing a list of other controllers.
 /// Use it to create editors of lists that contain individual item editors.
 /// It supports adding, deleting, and reordering items.
-abstract class AbstractListEditingController<
-  T,
-  C extends ValueNotifier<T?>
-> extends ValueNotifier<List<T?>> {
+abstract class AbstractListEditingController<T, C extends ValueNotifier<T?>>
+    extends ValueNotifier<List<T?>> {
   /// Sets the lower limit for item count.
   final int minLength;
 
@@ -14,7 +14,7 @@ abstract class AbstractListEditingController<
   final int maxLength;
 
   /// Whether to fire [notifyListeners] when item controllers fire their
-  /// [notifyListeners]. If [false], only the actions on the list itself
+  /// [notifyListeners]. If `false`, only the actions on the list itself
   /// will fire.
   final bool notifyOnItemChanges;
 
@@ -29,10 +29,9 @@ abstract class AbstractListEditingController<
     this.minLength = 0,
     required this.maxLength,
     this.notifyOnItemChanges = true,
-  }) :
-      assert(minLength >= 0),
-      assert(maxLength >= 1),
-      super([]) // Do not use parent's _value.
+  })  : assert(minLength >= 0, 'minLength must be >= 0, $minLength given.'),
+        assert(maxLength >= 1, 'maxLength must be >= 1, $maxLength given.'),
+        super([]) // Do not use parent's _value.
   ;
 
   /// The list of current values that this controller holds.
@@ -44,11 +43,11 @@ abstract class AbstractListEditingController<
   /// When you read its value, all controllers are surveyed for current values
   /// and the list of resulting values is returned.
   @override
-  set value(List<T?>? values) {
-    values = values ?? <T>[];
-
+  set value(List<T?> values) {
     if (values.length > maxLength) {
-      throw Exception('maxLength is $maxLength, tried to set a list of ${values.length}.');
+      throw Exception(
+        'maxLength is $maxLength, got a list of ${values.length}.',
+      );
     }
 
     final controllers = <C>[];
@@ -113,13 +112,11 @@ abstract class AbstractListEditingController<
   /// This is designed for use with Flutter's built-in [ReorderableListView]
   /// widget. See its docs for help on indexes.
   void reorder(int oldIndex, int newIndex) {
-    if (oldIndex < newIndex) {
-      // Removing the item at oldIndex will shorten the list by 1.
-      newIndex -= 1;
-    }
+    // Removing the item at oldIndex will shorten the list by 1.
+    final fixedNewIndex = (oldIndex < newIndex) ? newIndex - 1 : newIndex;
 
     final controller = _itemControllers.removeAt(oldIndex);
-    _itemControllers.insert(newIndex, controller);
+    _itemControllers.insert(fixedNewIndex, controller);
     notifyListeners();
   }
 
@@ -140,7 +137,10 @@ abstract class AbstractListEditingController<
   /// It should be present in the list.
   void deleteItemController(C controller) {
     if (!canDelete) {
-      throw Exception('minLength is $minLength, tried to delete when only had ${_itemControllers.length}.');
+      throw Exception(
+        'minLength is $minLength, '
+        'tried to delete when only had ${_itemControllers.length}.',
+      );
     }
 
     _itemControllers.removeWhere((aController) => aController == controller);

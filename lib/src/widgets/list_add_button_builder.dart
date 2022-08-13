@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:model_editors/model_editors.dart';
+
+import '../../model_editors.dart';
 
 class ListAddButtonBuilder extends StatelessWidget {
   final AbstractListEditingController controller;

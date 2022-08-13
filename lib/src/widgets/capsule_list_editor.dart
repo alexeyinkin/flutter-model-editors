@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import '../controllers/abstract_list.dart';
 import 'capsule.dart';
 
-class CapsuleListEditor<
-  T,
-  C extends ValueNotifier<T?>
-> extends StatelessWidget {
+class CapsuleListEditor<T, C extends ValueNotifier<T?>>
+    extends StatelessWidget {
   final AbstractListEditingController<T, C> controller;
   final Widget Function(BuildContext context, T value) capsuleContentBuilder;
   final WidgetBuilder? addButtonBuilder;
 
-  CapsuleListEditor({
+  const CapsuleListEditor({
     required this.controller,
     required this.capsuleContentBuilder,
     this.addButtonBuilder,
@@ -59,8 +57,6 @@ class CapsuleListEditor<
 
   Widget _buildCapsuleContent(BuildContext context, C oneController) {
     final obj = oneController.value;
-    return (obj == null)
-        ? Container()
-        : capsuleContentBuilder(context, obj);
+    return (obj == null) ? Container() : capsuleContentBuilder(context, obj);
   }
 }

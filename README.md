@@ -7,6 +7,7 @@ See the example on how to create an editor like this:
 ![Screenshot of a book editor](https://raw.githubusercontent.com/alexeyinkin/flutter-model-editors/main/example/book-editor.png)
 
 This package provides the following controllers:
+
 - `AbstractListEditingController` which is a `ValueNotifier` of `List<T?>`.
   It takes care for adding, deleting and reordering of list items.
   Just initialize it with a list of your models and then read the edited list.
@@ -15,6 +16,7 @@ This package provides the following controllers:
   and unchecking individual boxes.
 
 This package provides the following widgets which use the mentioned controllers:
+
 - `ColumnListEditor` which shows individual editors and allows to delete them.
 - `ReorderableListViewEditor` which also allows reordering.
 - `MaterialCheckboxColumn` which shows a checkbox group in a column.

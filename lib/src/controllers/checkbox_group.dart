@@ -40,6 +40,7 @@ class CheckboxGroupEditingController<T> extends ValueNotifier<List<T>> {
   }
 
   /// Adds or removes [value] based on [isSelected].
+  // ignore: avoid_positional_boolean_parameters
   void setSelected(T value, bool isSelected) {
     if (isSelected) {
       select(value);

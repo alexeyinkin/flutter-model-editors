@@ -3,13 +3,11 @@ import 'package:flutter/widgets.dart';
 import '../controllers/abstract_list.dart';
 import 'default_delete_button.dart';
 
-class ColumnListEditor<
-  T,
-  C extends ValueNotifier<T?>
-> extends StatelessWidget {
+class ColumnListEditor<T, C extends ValueNotifier<T?>> extends StatelessWidget {
   final AbstractListEditingController<T, C> controller;
   final Widget Function(BuildContext context, C controller) itemBuilder;
-  final Widget Function(BuildContext context, C controller)? deleteButtonBuilder;
+  final Widget Function(BuildContext context, C controller)?
+      deleteButtonBuilder;
   final double spacing;
 
   const ColumnListEditor({

@@ -31,7 +31,8 @@ class MaterialCheckboxColumn<T> extends StatelessWidget {
       children.add(
         MaterialCheckboxAndText(
           value: controller.isSelected(value),
-          onChanged: (isSelected) => controller.setSelected(value, isSelected ?? false),
+          onChanged: (isSelected) =>
+              controller.setSelected(value, isSelected ?? false),
           text: _getTitle(value),
         ),
       );
