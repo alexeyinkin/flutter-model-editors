@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/abstract_list.dart';
+import '../controllers/collection.dart';
 import 'default_delete_button.dart';
+import 'reorderable_list_editor.dart';
+import 'reorderable_map_editor.dart';
 
 // TODO(alexeyinkin): Allow horizontal list
-class ReorderableListViewEditor<T, C extends ValueNotifier<T?>>
-    extends StatelessWidget {
-  final AbstractListEditingController<T, C> controller;
-  final Widget Function(BuildContext context, C controller) itemBuilder;
+/// A widget to edit a collection.
+///
+/// [T] is the type for data in collection.
+/// [C] is the type for a controller for individual item.
+/// [CC] is the type for the controller of the entire collection.
+///
+/// Use [ReorderableListEditor] and [ReorderableMapEditor] for convenience.
+class ReorderableCollectionEditor<
+    T,
+    C extends ChangeNotifier,
+    CC extends CollectionEditingController<T, C>
+//
+    > extends StatelessWidget {
+  final CC controller;
+  final Widget Function(BuildContext context, C controller, int index)
+      itemBuilder;
   final Widget Function(BuildContext context, C controller)?
       deleteButtonBuilder;
   final bool shrinkWrap;
@@ -25,15 +39,15 @@ class ReorderableListViewEditor<T, C extends ValueNotifier<T?>>
   // TODO(alexeyinkin): Remove when this is fixed.
   final ValueWidgetBuilder<C> itemWrapper;
 
-  const ReorderableListViewEditor({
-    Key? key,
+  const ReorderableCollectionEditor({
+    super.key,
     required this.controller,
     required this.itemBuilder,
     this.deleteButtonBuilder,
     this.shrinkWrap = false,
     this.spacing = .0,
     this.itemWrapper = _defaultItemWrapper,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +75,11 @@ class ReorderableListViewEditor<T, C extends ValueNotifier<T?>>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: itemBuilder(context, itemController),
+                  child: itemBuilder(context, itemController, index),
                 ),
                 ..._getDeleteButtonIfNeed(context, itemController),
-                if (length > 1) _getDragHandle(index),
+                if (length > 1 && controller.isReorderable)
+                  _getDragHandle(index),
               ],
             ),
           ),

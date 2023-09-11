@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/abstract_list.dart';
+import '../controllers/list.dart';
 import 'capsule.dart';
 
-class CapsuleListEditor<T, C extends ValueNotifier<T?>>
-    extends StatelessWidget {
-  final AbstractListEditingController<T, C> controller;
+class CapsuleListEditor<
+    T,
+    C extends ValueNotifier<T?>
+//
+    > extends StatelessWidget {
+  final ListEditingController<T, C> controller;
   final Widget Function(BuildContext context, T value) capsuleContentBuilder;
   final WidgetBuilder? addButtonBuilder;
 

@@ -10,11 +10,11 @@ class MaterialCheckboxColumn<T> extends StatelessWidget {
   final Map<T, String>? labels;
 
   const MaterialCheckboxColumn({
-    Key? key,
+    super.key,
     required this.controller,
     required this.allValues,
     this.labels,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,11 +6,11 @@ class MaterialCheckboxAndText extends StatelessWidget {
   final String text;
 
   const MaterialCheckboxAndText({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     required this.text,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

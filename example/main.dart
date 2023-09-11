@@ -78,11 +78,14 @@ class BookEditingController extends ValueNotifier<Book?> {
   }
 }
 
-class BookListEditingController extends AbstractListEditingController<Book, BookEditingController> {
-  BookListEditingController() : super(minLength: 1, maxLength: 3);
-
-  @override
-  BookEditingController createItemController() => BookEditingController();
+class BookListEditingController
+    extends ListEditingController<Book, BookEditingController> {
+  BookListEditingController()
+      : super(
+          minLength: 1,
+          maxLength: 3,
+          createItemController: BookEditingController.new,
+        );
 }
 
 void main() {
@@ -133,13 +136,14 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              ReorderableListViewEditor<Book, BookEditingController>(
+              ReorderableListEditor<Book, BookEditingController>(
                 controller: _listController,
-                itemBuilder: (context, itemController) => BookEditor(controller: itemController),
+                itemBuilder: (context, itemController, index) =>
+                    BookEditor(controller: itemController),
                 shrinkWrap: true,
                 spacing: 20,
               ),
-              ListAddButtonBuilder(
+              CollectionAddButtonBuilder(
                 controller: _listController,
                 enabledBuilder: (context) {
                   return IconButton(
@@ -160,7 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onSavePressed() {
-    final items = _listController.nonNullValues; // or _listController.value to include nulls.
+    final items = _listController
+        .nonNullValues; // or _listController.value to include nulls.
     print("Got ${items.length} non-empty books.");
   }
 

@@ -1,18 +1,19 @@
 import 'package:flutter/widgets.dart';
 
-import '../../model_editors.dart';
+import '../controllers/collection.dart';
+import 'default_add_button.dart';
 
-class ListAddButtonBuilder extends StatelessWidget {
-  final AbstractListEditingController controller;
-  final WidgetBuilder enabledBuilder;
+class CollectionAddButtonBuilder extends StatelessWidget {
+  final CollectionEditingController controller;
+  final WidgetBuilder? enabledBuilder;
   final WidgetBuilder? disabledBuilder;
 
-  const ListAddButtonBuilder({
-    Key? key,
+  const CollectionAddButtonBuilder({
+    super.key,
     required this.controller,
-    required this.enabledBuilder,
+    this.enabledBuilder,
     this.disabledBuilder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,11 @@ class ListAddButtonBuilder extends StatelessWidget {
   }
 
   Widget _buildOnChange(BuildContext context) {
-    if (controller.canAdd) return enabledBuilder(context);
+    if (controller.canAdd) {
+      return enabledBuilder?.call(context) ??
+          DefaultAddButton(onPressed: controller.addEmpty);
+    }
+
     return disabledBuilder == null ? Container() : disabledBuilder!(context);
   }
 }

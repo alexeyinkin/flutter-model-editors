@@ -1,3 +1,19 @@
+## 0.3.0
+
+* **BREAKING**: Renamed `AbstractListEditingController` to `ListEditingController`,
+  changed its abstract `createController` method to a property.
+* **BREAKING**: Deleted `ListEditingController.sortValues`. Add some kind of `sortedValue` if needed.
+* **BREAKING**: `ReorderableListViewEditor` renamed to `ReorderableCollectionEditor`.
+* **BREAKING**: `ListAddButtonBuilder` renamed to `CollectionAddButtonBuilder`.
+* **BREAKING**: Require Dart 2.17 & Flutter 3.0.
+* Added the abstract `CollectionEditingController`.
+* Added `MapEditingController`, `ReorderableMapEditor`.
+* Added `CollectionEditingController.isReorderable`, defaults to `true`.
+* Added `ModelViewOrEditWidget`, `ModelViewOrEditRawWidget`.
+* Added `EnumDropdownButton`.
+* Added `DefaultAddButton`.
+* `CollectionAddButtonBuilder.enabledBuilder` is optional and defaults to `DefaultAddButton`.
+
 ## 0.2.0
 
 * **BREAKING**: `AbstractListEditingController` requires non-null `value`.

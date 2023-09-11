@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class DefaultDeleteButton extends StatelessWidget {
+class DefaultAddButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const DefaultDeleteButton({
+  const DefaultAddButton({
     super.key,
     required this.onPressed,
   });
@@ -11,7 +11,7 @@ class DefaultDeleteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.delete),
+      icon: const Icon(Icons.add),
       padding: const EdgeInsets.all(4),
       constraints: const BoxConstraints(),
       splashRadius: 20,

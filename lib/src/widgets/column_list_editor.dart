@@ -1,22 +1,26 @@
 import 'package:flutter/widgets.dart';
 
-import '../controllers/abstract_list.dart';
+import '../controllers/list.dart';
 import 'default_delete_button.dart';
 
-class ColumnListEditor<T, C extends ValueNotifier<T?>> extends StatelessWidget {
-  final AbstractListEditingController<T, C> controller;
+class ColumnListEditor<
+    T,
+    C extends ValueNotifier<T?>
+//
+    > extends StatelessWidget {
+  final ListEditingController<T, C> controller;
   final Widget Function(BuildContext context, C controller) itemBuilder;
   final Widget Function(BuildContext context, C controller)?
       deleteButtonBuilder;
   final double spacing;
 
   const ColumnListEditor({
-    Key? key,
+    super.key,
     required this.controller,
     required this.itemBuilder,
     this.deleteButtonBuilder,
     this.spacing = .0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

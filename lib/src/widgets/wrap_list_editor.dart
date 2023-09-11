@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/abstract_list.dart';
+import '../controllers/list.dart';
 import 'default_delete_button.dart';
 
-class WrapListEditor<T, C extends ValueNotifier<T?>> extends StatelessWidget {
-  final AbstractListEditingController<T, C> controller;
+class WrapListEditor<
+    T,
+    C extends ValueNotifier<T?>
+//
+    > extends StatelessWidget {
+  final ListEditingController<T, C> controller;
   final Widget Function(BuildContext context, C controller) itemBuilder;
   final Widget Function(BuildContext context, C controller)?
       deleteButtonBuilder;
@@ -14,7 +18,7 @@ class WrapListEditor<T, C extends ValueNotifier<T?>> extends StatelessWidget {
   final WidgetBuilder? addButtonBuilder;
 
   const WrapListEditor({
-    Key? key,
+    super.key,
     required this.controller,
     required this.itemBuilder,
     this.deleteButtonBuilder,
@@ -22,7 +26,7 @@ class WrapListEditor<T, C extends ValueNotifier<T?>> extends StatelessWidget {
     this.runSpacing = .0,
     this.deleteButtonSpacing = .0,
     this.addButtonBuilder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +57,7 @@ class WrapListEditor<T, C extends ValueNotifier<T?>> extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         itemBuilder(context, itemController),
-        ..._getDeleteButtonIfNeed(context, itemController)
+        ..._getDeleteButtonIfNeed(context, itemController),
       ],
     );
   }
