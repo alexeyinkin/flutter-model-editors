@@ -1,6 +1,6 @@
 name: model_editors
 description: Editors for complex models and lists inspired by simplicity of TextEditingController, without manual state management.
-version: 0.3.0
+version: 0.3.1
 repository: https://github.com/alexeyinkin/flutter-model-editors
 
 environment:

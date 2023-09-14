@@ -87,6 +87,28 @@ abstract class CollectionEditingController<
     notifyListeners();
   }
 
+  /// Deletes and disposes an item controller.
+  /// It should be present in the list.
+  void deleteItemControllerAndAfter(C controller) {
+    if (!canDelete) {
+      throw Exception(
+        'minLength is $minLength, '
+            'tried to delete when only had ${_itemControllers.length}.',
+      );
+    }
+
+    final index = _itemControllers.indexWhere((c) => c == controller);
+    if (index == -1) {
+      throw Exception('Controller not found');
+    }
+
+    for (int i = index; i < _itemControllers.length; i++) {
+      _itemControllers[i].dispose();
+    }
+    _itemControllers.removeRange(index, _itemControllers.length);
+    notifyListeners();
+  }
+
   /// Takes a controller at [oldIndex] and inserts it at [newIndex].
   ///
   /// This is designed for use with Flutter's built-in [ReorderableListView]

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../controllers/collection.dart';
 import 'default_delete_button.dart';
+import 'default_delete_this_and_after_button.dart';
 import 'reorderable_list_editor.dart';
 import 'reorderable_map_editor.dart';
 
@@ -24,6 +25,9 @@ class ReorderableCollectionEditor<
       itemBuilder;
   final Widget Function(BuildContext context, C controller)?
       deleteButtonBuilder;
+  final Widget Function(BuildContext context, C controller)?
+      deleteThisAndAfterButtonBuilder;
+  final bool showDeleteThisAndAfterButtons;
   final bool shrinkWrap;
   final double spacing;
 
@@ -44,6 +48,8 @@ class ReorderableCollectionEditor<
     required this.controller,
     required this.itemBuilder,
     this.deleteButtonBuilder,
+    this.deleteThisAndAfterButtonBuilder,
+    this.showDeleteThisAndAfterButtons = false,
     this.shrinkWrap = false,
     this.spacing = .0,
     this.itemWrapper = _defaultItemWrapper,
@@ -78,6 +84,7 @@ class ReorderableCollectionEditor<
                   child: itemBuilder(context, itemController, index),
                 ),
                 ..._getDeleteButtonIfNeed(context, itemController),
+                ..._getDeleteAndFollowingButtonIfNeed(context, itemController),
                 if (length > 1 && controller.isReorderable)
                   _getDragHandle(index),
               ],
@@ -126,6 +133,27 @@ class ReorderableCollectionEditor<
     return [
       DefaultDeleteButton(
         onPressed: () => controller.deleteItemController(itemController),
+      ),
+    ];
+  }
+
+  List<Widget> _getDeleteAndFollowingButtonIfNeed(
+    BuildContext context,
+    C itemController,
+  ) {
+    if (!showDeleteThisAndAfterButtons || !controller.canDelete) {
+      return [];
+    }
+
+    if (deleteThisAndAfterButtonBuilder != null) {
+      return [deleteButtonBuilder!(context, itemController)];
+    }
+
+    return [
+      DefaultDeleteThisAndAfterButton(
+        axis: Axis.horizontal,
+        onPressed: () =>
+            controller.deleteItemControllerAndAfter(itemController),
       ),
     ];
   }

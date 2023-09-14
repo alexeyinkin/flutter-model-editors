@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Added `ReorderableCollectionEditor.showDeleteThisAndAfterButtons`, `DefaultDeleteThisAndAfterButton`.
+
 ## 0.3.0
 
 * **BREAKING**: Renamed `AbstractListEditingController` to `ListEditingController`,
