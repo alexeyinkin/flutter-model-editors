@@ -12,17 +12,22 @@ class EnumDropdownButton<T extends Enum> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<T>(
-      items: items
-          .map(
-            (i) => DropdownMenuItem(
-              value: i,
-              child: Text(i.name),
-            ),
-          )
-          .toList(growable: false),
-      value: controller.value,
-      onChanged: (v) => controller.value = v,
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, _) {
+        return DropdownButton<T>(
+          items: items
+              .map(
+                (i) => DropdownMenuItem(
+                  value: i,
+                  child: Text(i.name),
+                ),
+              )
+              .toList(growable: false),
+          value: controller.value,
+          onChanged: (v) => controller.value = v,
+        );
+      },
     );
   }
 }

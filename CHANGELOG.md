@@ -1,3 +1,7 @@
+## 0.4.1
+
+* Added `AnimatedBuilder` into `EnumDropdownButton`.
+
 ## 0.4.0
 
 * **BREAKING**: Changed the signature of `ModelViewOrEditRawWidget` callbacks.
