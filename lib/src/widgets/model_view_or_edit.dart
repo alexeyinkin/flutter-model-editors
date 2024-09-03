@@ -15,8 +15,8 @@ class ModelViewOrEditWidget<
   final T model;
   final AsyncValueSetter<T> saveCallback;
 
-  final Widget Function(BuildContext, T) viewBuilder;
-  final Widget Function(BuildContext, T, C) editBuilder;
+  final ModelViewBuilder<T> viewBuilder;
+  final ModelEditBuilder<T, C> editBuilder;
   final Widget Function(BuildContext, Widget)? buttonRowBuilder;
 
   const ModelViewOrEditWidget({

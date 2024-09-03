@@ -56,16 +56,19 @@ class MapEditingController<
   }
 
   @override
-  void addEmpty() => add(null, null);
+  MapEntryController<K, V, KC, VC> addEmpty() => add(null, null);
 
   /// Adds an item.
   ///
   /// Ignores [maxLength] because the button to add is supposed to
   /// not be visible if items are at their limit.
   /// Use [CollectionAddButtonBuilder] to automate such button visibility.
-  void add(K? key, V? value) {
-    addController(_createController(key, value));
+  MapEntryController<K, V, KC, VC> add(K? key, V? value) {
+    final controller = _createController(key, value);
+
+    addController(controller);
     notifyListeners();
+    return controller;
   }
 
   MapEntryController<K, V, KC, VC> _createController(K? key, V? value) {
@@ -106,6 +109,13 @@ class MapEditingController<
       for (final entry in value.entries)
         if (entry.value != null) entry.key: entry.value as V,
     };
+  }
+
+  Iterable<K?> get keys {
+    return [
+      for (final pair in itemControllers)
+        pair.keyController.value,
+    ];
   }
 }
 

@@ -1,3 +1,14 @@
+## 0.4.0
+
+* **BREAKING**: Changed the signature of `ModelViewOrEditRawWidget` callbacks.
+* `CollectionEditingController.addEmpty`, `ListEditingController.add`, and `MapEditingController.add`
+  now return the added controller.
+* Added `MapEditingController.keys` getter.
+* Added `CollectionAddButtonBuilder.isEnabled` callback to override the default check of item count.
+* Added `FixedHeaderWidget`.
+* Fixed `EditorController.save()` not rethrowing a throwable after printing it.
+* Fixed the direction of an arrow on `DefaultDeleteThisAndAfterButton`.
+
 ## 0.3.1
 
 * Added `ReorderableCollectionEditor.showDeleteThisAndAfterButtons`, `DefaultDeleteThisAndAfterButton`.

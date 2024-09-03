@@ -42,6 +42,7 @@ class EditorController<
       // ignore: avoid_catches_without_on_clauses
     } catch (ex) {
       print(ex); // ignore: avoid_print
+      rethrow;
     } finally {
       _isSaving = false;
       notifyListeners();

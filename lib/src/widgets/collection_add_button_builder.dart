@@ -7,12 +7,14 @@ class CollectionAddButtonBuilder extends StatelessWidget {
   final CollectionEditingController controller;
   final WidgetBuilder? enabledBuilder;
   final WidgetBuilder? disabledBuilder;
+  final ValueGetter<bool>? isEnabled;
 
   const CollectionAddButtonBuilder({
     super.key,
     required this.controller,
     this.enabledBuilder,
     this.disabledBuilder,
+    this.isEnabled,
   });
 
   @override
@@ -24,7 +26,7 @@ class CollectionAddButtonBuilder extends StatelessWidget {
   }
 
   Widget _buildOnChange(BuildContext context) {
-    if (controller.canAdd) {
+    if (isEnabled?.call() ?? controller.canAdd) {
       return enabledBuilder?.call(context) ??
           DefaultAddButton(onPressed: controller.addEmpty);
     }

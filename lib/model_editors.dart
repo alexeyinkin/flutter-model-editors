@@ -9,6 +9,7 @@ export 'src/widgets/collection_add_button_builder.dart';
 export 'src/widgets/column_list_editor.dart';
 export 'src/widgets/default_add_button.dart';
 export 'src/widgets/enum_dropdown_button.dart';
+export 'src/widgets/fixed_header.dart';
 export 'src/widgets/material_checkbox_column.dart';
 export 'src/widgets/model_view_or_edit.dart';
 export 'src/widgets/model_view_or_edit_raw.dart';

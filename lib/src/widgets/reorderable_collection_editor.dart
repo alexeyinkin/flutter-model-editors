@@ -151,7 +151,7 @@ class ReorderableCollectionEditor<
 
     return [
       DefaultDeleteThisAndAfterButton(
-        axis: Axis.horizontal,
+        axis: Axis.vertical,
         onPressed: () =>
             controller.deleteItemControllerAndAfter(itemController),
       ),

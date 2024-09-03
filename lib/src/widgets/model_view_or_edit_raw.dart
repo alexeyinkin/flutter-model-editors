@@ -3,6 +3,19 @@ import 'package:model_interfaces/model_interfaces.dart';
 
 import '../controllers/editor.dart';
 
+typedef ModelViewBuilder<T> = Widget Function(
+  BuildContext,
+  T,
+  Widget buttons,
+);
+
+typedef ModelEditBuilder<T, C> = Widget Function(
+  BuildContext,
+  T,
+  C controller,
+  Widget buttons,
+);
+
 class ModelViewOrEditRawWidget<
     I,
     T extends WithId<I>,
@@ -13,8 +26,8 @@ class ModelViewOrEditRawWidget<
   final T model;
   final VoidCallback? editCallback;
 
-  final Widget Function(BuildContext, T) viewBuilder;
-  final Widget Function(BuildContext, T, C) editBuilder;
+  final ModelViewBuilder<T> viewBuilder;
+  final ModelEditBuilder<T, C> editBuilder;
   final Widget Function(BuildContext, Widget)? buttonRowBuilder;
 
   const ModelViewOrEditRawWidget({
@@ -32,15 +45,21 @@ class ModelViewOrEditRawWidget<
     return AnimatedBuilder(
       animation: controller,
       builder: (context, _) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _getButtonRow(context),
-            if (controller.isEditing)
-              editBuilder(context, model, controller.editingController)
-            else
-              viewBuilder(context, model),
-          ],
+        final buttons = _getButtonRow(context);
+
+        if (!controller.isEditing) {
+          return viewBuilder(
+            context,
+            model,
+            buttons,
+          );
+        }
+
+        return editBuilder(
+          context,
+          model,
+          controller.editingController,
+          buttons,
         );
       },
     );

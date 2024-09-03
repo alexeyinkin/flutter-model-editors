@@ -61,7 +61,7 @@ abstract class CollectionEditingController<
   bool get canDelete => _itemControllers.length > minLength;
 
   /// Adds an empty item.
-  void addEmpty();
+  C addEmpty();
 
   @protected
   void addController(C controller) {

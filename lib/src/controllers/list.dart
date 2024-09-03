@@ -55,19 +55,20 @@ class ListEditingController<
   }
 
   @override
-  void addEmpty() => add(null);
+  C addEmpty() => add(null);
 
   /// Adds an item.
   ///
   /// Ignores [maxLength] because the button to add is supposed to
   /// not be visible if items are at their limit.
   /// Use [CollectionAddButtonBuilder] to automate such button visibility.
-  void add(T? value) {
+  C add(T? value) {
     final controller = createItemController();
     controller.value = value;
 
     addController(controller);
     notifyListeners();
+    return controller;
   }
 
   @override
