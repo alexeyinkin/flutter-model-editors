@@ -1,3 +1,8 @@
+## 0.4.2
+
+* Added `MaterialCheckbox`, `MaterialCheckboxWithText`.
+* Exported `CapsuleWidget`.
+
 ## 0.4.1
 
 * Added `AnimatedBuilder` into `EnumDropdownButton`.

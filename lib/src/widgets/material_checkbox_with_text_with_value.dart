@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class MaterialCheckboxAndText extends StatelessWidget {
-  final bool value;
+class MaterialCheckboxWithTextWithValue extends StatelessWidget {
   final ValueChanged<bool?> onChanged;
   final String text;
+  final bool value;
 
-  const MaterialCheckboxAndText({
+  const MaterialCheckboxWithTextWithValue({
     super.key,
-    required this.value,
     required this.onChanged,
     required this.text,
+    required this.value,
   });
 
   @override
@@ -19,8 +19,8 @@ class MaterialCheckboxAndText extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Checkbox(
-          value: value,
           onChanged: onChanged,
+          value: value,
         ),
         Container(width: 10),
         Text(text),

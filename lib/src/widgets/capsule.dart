@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
+const _verticalPadding = 5.0;
+const _horizontalPadding = 10.0;
+
+const _padding = EdgeInsets.symmetric(
+  horizontal: _horizontalPadding,
+  vertical: _verticalPadding,
+);
+
 class CapsuleWidget extends StatelessWidget {
   final Widget child;
   final bool selected;
-
-  static const verticalPadding = 5.0;
-  static const horizontalPadding = 10.0;
-
-  static const _padding = EdgeInsets.symmetric(
-    horizontal: horizontalPadding,
-    vertical: verticalPadding,
-  );
 
   const CapsuleWidget({
     required this.child,

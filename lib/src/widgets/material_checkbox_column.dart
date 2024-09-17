@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:model_interfaces/model_interfaces.dart';
 
 import '../controllers/checkbox_group.dart';
-import 'material_checkbox_and_text.dart';
+import 'material_checkbox_with_text_with_value.dart';
 
 class MaterialCheckboxColumn<T> extends StatelessWidget {
   final CheckboxGroupEditingController<T> controller;
@@ -29,7 +29,7 @@ class MaterialCheckboxColumn<T> extends StatelessWidget {
 
     for (final value in allValues) {
       children.add(
-        MaterialCheckboxAndText(
+        MaterialCheckboxWithTextWithValue(
           value: controller.isSelected(value),
           onChanged: (isSelected) =>
               controller.setSelected(value, isSelected ?? false),
