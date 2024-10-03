@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../controllers/collection.dart';
+import 'controller_widget.dart';
 import 'default_delete_button.dart';
 import 'default_delete_this_and_after_button.dart';
 import 'reorderable_list_editor.dart';
@@ -19,7 +20,8 @@ class ReorderableCollectionEditor<
     C extends ChangeNotifier,
     CC extends CollectionEditingController<T, C>
 //
-    > extends StatelessWidget {
+    > extends StatelessWidget implements ControllerWidget {
+  @override
   final CC controller;
   final Widget Function(BuildContext context, C controller, int index)
       itemBuilder;

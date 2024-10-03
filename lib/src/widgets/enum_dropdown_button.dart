@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-class EnumDropdownButton<T extends Enum> extends StatelessWidget {
-  final Iterable<T> items;
+import 'controller_widget.dart';
+
+class EnumDropdownButton<T extends Enum> extends StatelessWidget
+    implements ControllerWidget {
+  @override
   final ValueNotifier<T?> controller;
+  final Iterable<T> items;
 
   const EnumDropdownButton({
     super.key,

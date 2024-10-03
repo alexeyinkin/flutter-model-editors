@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../controllers/list.dart';
+import 'controller_widget.dart';
 import 'default_delete_button.dart';
 
 class WrapListEditor<
     T,
     C extends ValueNotifier<T?>
 //
-    > extends StatelessWidget {
+    > extends StatelessWidget implements ControllerWidget {
+  @override
   final ListEditingController<T, C> controller;
   final Widget Function(BuildContext context, C controller) itemBuilder;
   final Widget Function(BuildContext context, C controller)?

@@ -8,6 +8,7 @@ export 'src/widgets/capsule.dart';
 export 'src/widgets/capsule_list_editor.dart';
 export 'src/widgets/collection_add_button_builder.dart';
 export 'src/widgets/column_list_editor.dart';
+export 'src/widgets/controller_widget.dart';
 export 'src/widgets/default_add_button.dart';
 export 'src/widgets/enum_dropdown_button.dart';
 export 'src/widgets/fixed_header.dart';

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:model_interfaces/model_interfaces.dart';
 
 import '../controllers/checkbox_group.dart';
+import 'controller_widget.dart';
 import 'material_checkbox_with_text_with_value.dart';
 
-class MaterialCheckboxColumn<T> extends StatelessWidget {
+class MaterialCheckboxColumn<T> extends StatelessWidget
+    implements ControllerWidget {
+  @override
   final CheckboxGroupEditingController<T> controller;
   final List<T> allValues;
   final Map<T, String>? labels;

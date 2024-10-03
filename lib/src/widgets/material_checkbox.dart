@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-class MaterialCheckbox extends StatelessWidget {
+import 'controller_widget.dart';
+
+class MaterialCheckbox extends StatelessWidget implements ControllerWidget {
+  @override
   final ValueNotifier<bool> controller;
 
   const MaterialCheckbox({
